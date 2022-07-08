@@ -27,7 +27,7 @@ String sttsled1 = "OFF";
 String sttsled2 = "OFF";
 String sttsled3 = "OFF";
 String sttsled4 = "OFF";
-
+int jumlahnyala = 0 ;
 
 
 
@@ -66,8 +66,10 @@ void loop() {
 
 		if (msg.text.equalsIgnoreCase("L1 ON")) {                 // ketika pesan L1 ON
 			digitalWrite(led1, HIGH);                               // Menyalakan lampu 1
-      sttsled1 = "ON";     
+      sttsled1 = "ON";
+      jumlahnyala = jumlahnyala +1;
       myBot.sendMessage(msg.sender.id, "Light 1 is now ON");  // notify the sender
+      myBot.sendMessage(msg.sender.id, "L1 telah menyala "+(String)jumlahnyala+"x"); 
       myBot.sendMessage(msg.sender.id, "STATUS LAMPU\n=================\nL1 = "+sttsled1+"\nL2 = "+sttsled2+"\nL3 = "+sttsled3+"\nL4 = "+sttsled4+"\n=================");        
 		}
 		else if (msg.text.equalsIgnoreCase("L1 OFF")) {           // ketika pesan L1 OFF
@@ -135,6 +137,12 @@ void loop() {
       sttsled4 = "ON";
 			myBot.sendMessage(msg.sender.id, "ALL Light is now ON"); // notify the sender
       myBot.sendMessage(msg.sender.id, "STATUS LAMPU\n=================\nL1 = "+sttsled1+"\nL2 = "+sttsled2+"\nL3 = "+sttsled3+"\nL4 = "+sttsled4+"\n=================");        
+		}
+     else if (led1 == HIGH) {
+               
+			jumlahnyala = jumlahnyala +1;
+      myBot.sendMessage(msg.sender.id, "L1 telah menyala "+(String)jumlahnyala+"x"); 
+      
 		}
 		else {                                                    // otherwise...
 			// generate the message for the sender
